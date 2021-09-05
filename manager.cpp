@@ -1,5 +1,5 @@
 
-#ifdef DAULET
+#ifdef TEST
 #include "profile.h"
 #endif
 #include "manager.h"
@@ -12,7 +12,7 @@ using namespace Json;
 
 Json::Document Manager::Process(Json::Document input)
 {
-#ifdef DAULET_PROF
+#ifdef TEST_PROFILE
 	LOG_DURATION("Process");
 #endif
 	auto rootm = input.GetRoot().AsMap();
@@ -28,7 +28,7 @@ Json::Document Manager::Process(Json::Document input)
 
 void Manager::ProcessSettReq(const Json::Node& input)
 {
-#ifdef DAULET_PROF
+#ifdef TEST_PROFILE
 	LOG_DURATION("ProcessSettReq");
 #endif
 	auto m = input.AsMap();
@@ -38,13 +38,13 @@ void Manager::ProcessSettReq(const Json::Node& input)
 
 void Manager::ProcessBaseReq(const Json::Node& input)
 {
-#ifdef DAULET_PROF
+#ifdef TEST_PROFILE
 	LOG_DURATION("ProcessBaseReq");
 #endif
 	auto arr = input.AsArray();
 
 	{
-#ifdef DAULET_PROF
+#ifdef TEST_PROFILE
 		LOG_DURATION("ProcessBaseReq: stops");
 #endif
 		// processing all stops
@@ -64,7 +64,7 @@ void Manager::ProcessBaseReq(const Json::Node& input)
 	_pGraph = make_unique<GraphT>(_stops.size());
 
 	{
-#ifdef DAULET_PROF
+#ifdef TEST_PROFILE
 		LOG_DURATION("ProcessBaseReq: buses");
 #endif
 		// processing all buses
@@ -147,7 +147,7 @@ pair<string, Bus> Manager::BuildBus(const NodesMap& nmap)
 
 Document Manager::ProcessStatReq(const Node& input)
 {
-#ifdef DAULET_PROF
+#ifdef TEST_PROFILE
 	LOG_DURATION("ProcessStatReq");
 #endif
 	auto arr = input.AsArray();
@@ -178,7 +178,7 @@ Document Manager::ProcessStatReq(const Node& input)
 
 Node Manager::ProcessStop(const NodesMap& nmap)
 {
-#ifdef DAULET_PROF
+#ifdef TEST_PROFILE
 	LOG_DURATION("ProcessStop");
 #endif
 	NodesMap answer;
@@ -207,7 +207,7 @@ Node Manager::ProcessStop(const NodesMap& nmap)
 
 Node Manager::ProcessBus(const NodesMap& nmap)
 {
-#ifdef DAULET_PROF
+#ifdef TEST_PROFILE
 	LOG_DURATION("ProcessBus");
 #endif
 	NodesMap answer;
@@ -231,7 +231,7 @@ Node Manager::ProcessBus(const NodesMap& nmap)
 
 Node Manager::ProcessRoute(const NodesMap& nmap)
 {
-#ifdef DAULET_PROF
+#ifdef TEST_PROFILE
 	LOG_DURATION("ProcessRoute");
 #endif
 	NodesMap answer;
